@@ -1,5 +1,5 @@
 //only need Schema constructor and model fxn from mongoose library
-const { Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const PizzaSchema = new Schema({
     pizzaName: {
@@ -20,7 +20,7 @@ const PizzaSchema = new Schema({
 });
 
 //create Pizza  model using Pizza model that Mongoose provides
-const Pizza = model ('Pizza', PizzaSchema);
+const Pizza = model('Pizza', PizzaSchema);
 
 //export the Pizza model to the
 module.exports = Pizza;
