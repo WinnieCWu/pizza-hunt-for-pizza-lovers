@@ -31,7 +31,8 @@ const pizzaController = {
         select: '-__v'
       })
       .select('-__v')
-      .then((dbPizzaData) => {
+      .then((dbPizzaData) => 
+        {
         //If no pizza is found, send 404 error
         if (!dbPizzaData) {
           res.status(404).json({ message: "No pizza found with this id!" });
@@ -52,7 +53,7 @@ const pizzaController = {
   createPizza({ body }, res) {
     Pizza.create(body)
       .then((dbPizzaData) => res.json(dbPizzaData))
-      .catch((err) => res.json(err));
+      .catch((err) => res.json(400).json(err));
   },
 
   //method to handle PUT/api/pizzas/:id
@@ -75,8 +76,14 @@ const pizzaController = {
   //DELETE/api/pizzas/:id
   deletePizza({ params }, res) {
     Pizza.findOneAndDelete({ _id: params.id })
-      .then((dbPizzaData) => res.json(dbPizzaData))
-      .catch((err) => res.json(err));
+    .then(dbPizzaData => {
+      if (!dbPizzaData) {
+        res.status(404).json({ message: 'No pizza found with this id!' });
+        return;
+      }
+      res.json(dbPizzaData);
+    })
+    .catch(err => res.status(400).json(err));
   }
 };
 

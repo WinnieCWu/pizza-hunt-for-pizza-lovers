@@ -26,9 +26,9 @@ const PizzaSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         //refer to doc to find the right commands
-        ref: "Comment",
-      },
-    ],
+        ref: "Comment"
+      }
+    ]
   },
   {
     toJSON: {
