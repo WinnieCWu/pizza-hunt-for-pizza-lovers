@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use(require("./routes"));
 
 //tells Mongoose which db to connect to (ie Heroku; else, will be to local route)
 mongoose.connect(
@@ -22,5 +21,7 @@ mongoose.connect(
 );
 //Use this to log mono queries being executed!
 mongoose.set("debug", true);
+
+app.use(require("./routes"));
 
 app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));

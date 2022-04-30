@@ -3,7 +3,7 @@ const $pizzaList = document.querySelector("#pizza-list");
 //tie in API calls to connect front-end and backend
 const getPizzaList = () => {
   //get all pizza data
-  fetch("/api/pizzas")
+  fetch('/api/pizzas')
     //transform it into JSON we can use
     .then((response) => response.json())
     .then((pizzaListArr) => {
