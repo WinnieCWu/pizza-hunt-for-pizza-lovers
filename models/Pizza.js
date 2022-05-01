@@ -38,16 +38,17 @@ const PizzaSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      getters: true,
+      getters: true
     },
     //this is a virtual that Mongoose returns, so we don't need it
-    id: false,
+    id: false
   }
 );
 
 // get total count of comments and replies on retrieval
 PizzaSchema.virtual("commentCount").get(function () {
-  return this.comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
+  return this.comments.reduce(
+    (total, comment) => total + comment.replies.length + 1, 0);
 });
 
 //create Pizza  model using Pizza model that Mongoose provides

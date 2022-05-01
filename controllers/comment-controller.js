@@ -3,7 +3,7 @@ const { Pizza, Comment } = require("../models");
 const commentController = {
   //add comment to pizza
   addComment({ params, body }, res) {
-    console.log(body);
+    console.log(params);
     Comment.create(body)
       .then(({ _id }) => {
         return Pizza.findOneAndUpdate(
@@ -14,6 +14,7 @@ const commentController = {
         );
       })
       .then((dbPizzaData) => {
+        console.log(dbPizzaData);
         if (!dbPizzaData) {
           res.status(404).json({ message: "No pizza found with this id!" });
           return;
@@ -27,7 +28,7 @@ const commentController = {
     Comment.findOneAndUpdate(
       { _id: params.commentId },
       { $push: { replies: body } },
-      { new: true }
+      { new: true, runValidators: true }
     )
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
@@ -73,7 +74,7 @@ const commentController = {
         res.json(dbPizzaData);
       })
       .catch((err) => res.json(err));
-  },
+  }
 };
 
 module.exports = commentController;

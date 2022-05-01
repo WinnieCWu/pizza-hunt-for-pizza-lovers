@@ -17,6 +17,7 @@ function getPizza() {
   // get pizzaInfo
   fetch(`/api/pizzas/${pizzaId}`)
     .then(response => {
+      console.log(response);
       // check for a 4xx or 5xx error from server\
       //error handling in case user's pizza isn't in db
       if (!response.ok) {

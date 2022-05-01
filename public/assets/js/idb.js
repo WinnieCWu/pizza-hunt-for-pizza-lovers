@@ -13,7 +13,6 @@ request.onupgradeneeded = function (event) {
   //won't run again unless we delete db from browser or change version # (and need update)
   //locally scoped connection to db to store pizza data
   db.createObjectStore("new_pizza", { autoIncrement: true });
-  // upon a successful
 };
 
 request.onsuccess = function (event) {
@@ -23,12 +22,12 @@ request.onsuccess = function (event) {
   // check if app is online, if yes run uploadPizza() function to send all local db data to api
   if (navigator.onLine) {
     // we haven't created this yet, but we will soon, so let's comment it out for now
-    // uploadPizza();
+    uploadPizza();
   }
 };
 
 //inform us if anything goes wrong with db interaction
-request.onerror = function (event) {
+request.onerror = function(event) {
   // log error here
   console.log(event.target.errorCode);
 };
@@ -67,7 +66,7 @@ function uploadPizza() {
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
-        },
+        }
       })
         .then((response) => response.json())
         .then((serverResponse) => {
@@ -88,4 +87,7 @@ function uploadPizza() {
         });
     }
   };
-};
+}
+
+// listen for app coming back online
+window.addEventListener('online', uploadPizza);
