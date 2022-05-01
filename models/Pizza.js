@@ -6,19 +6,24 @@ const PizzaSchema = new Schema(
   {
     pizzaName: {
       type: String,
+      required: true,
+      trim: true
     },
     createdBy: {
       type: String,
+      required: true,
+      trim: true
     },
     createdAt: {
       type: Date,
       default: Date.now,
       //the value will be formatted by dateFormat() fxn instead of default, so it's prettier
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      get: (createdAtVal) => dateFormat(createdAtVal)
     },
     size: {
       type: String,
-      default: "Large",
+      enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
+      default: "Large"
     },
     toppings: [],
     //tell Mongoose to expect an ObjectID -- the Comment model

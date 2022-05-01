@@ -61,7 +61,8 @@ const pizzaController = {
   updatePizza({ params, body }, res) {
     //if we don't say 3rd param {new:true}, it'll return the original document.
     //this returns the new version of doc
-    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    //add runValidators:true so server knows to validate any new info
+    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
           res.status(404).json({ message: "No pizza found with this id!" });
@@ -69,7 +70,7 @@ const pizzaController = {
         }
         res.json(dbPizzaData);
       })
-      .catch((err) => res.json(err));
+      .catch((err) => res.status(400).json(err));
   },
 
   //method to delete pizza from db
