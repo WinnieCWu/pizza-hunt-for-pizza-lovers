@@ -13,11 +13,10 @@ mongoose.connect(
   process.env.MONGODB_URI ||
     "mongodb://localhost:3001/pizza-hunt-for-pizza-lovers"
   //these are deprecated from as of Mongoose 6 release, and act as this normally
-  // , {
-  //     useFindAndModify: false,
-  //     userNewUrlParser: true,
-  //     useUnifiedTopology: true
-  // }
+  , {
+      userNewUrlParser: true,
+      useUnifiedTopology: true
+  }
 );
 //Use this to log mono queries being executed!
 mongoose.set("debug", true);
